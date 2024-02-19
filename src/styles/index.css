@@ -1,0 +1,23 @@
+@import "fonts.css";
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: 'VTB Group', sans-serif;
+  background-color: #DFF1FF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
