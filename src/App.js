@@ -316,7 +316,7 @@ export function App() {
                                 <Item key={itemIndex}>
                                     <Number>{itemIndex + (groupIndex * SPECIAL_GROUP_AMOUNT) + 1}</Number>
                                     <Id>{item.id}</Id>
-                                    <Points>{item.points.toString().padStart(3, '0')}</Points>
+                                    <Points>{item.points.toString().padStart(2, '0')}</Points>
                                 </Item>
                             ))}
                         </List>
@@ -348,7 +348,7 @@ export function App() {
             <Logo src={logo} />
             <Title>Рейтинг игроков{'\n'}«Вот эТо Башня»</Title>
             <Content>
-                <SearchInput placeholder="Введите ник игрока" value={search} onChange={setSearch} />
+                <SearchInput placeholder="Введи свой ID" value={search} onChange={setSearch} />
                 {groupsContent}
             </Content>
         </Wrapper>
