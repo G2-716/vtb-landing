@@ -4,7 +4,8 @@ import bgMobile from './assets/images/bgMobile.png'
 import bgDesktop from './assets/images/bgDesktop.png'
 import logo from './assets/images/logo.svg'
 
-const GOOGLE_TABLES_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbwJk6keeTWnKBXtSPX1nKA2JglvHUsvxkve8Yj6y_1cgouZUrm0VE0Vh7_Jpz8v0I65/exec'
+export const BIN_ID = '65dcd16b266cfc3fde8fa4b1'
+export const ENDPOINT_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest?meta=false`
 const SPECIAL_GROUP_AMOUNT = 50
 const MIN_DESKTOP_WIDTH = 992
 
@@ -329,15 +330,11 @@ export function App() {
     useEffect(() => {
         setIsLoading(true)
 
-        fetch(GOOGLE_TABLES_ENDPOINT_URL, { redirect: 'follow' },)
+        fetch(ENDPOINT_URL, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
             .then(resp => resp.json())
-            .then(resp => resp?.reduce((acc, [id, name, email, points]) => {
-                if (id && name && email) {
-                    return [...acc, {id, name, email, points: +points || 0}]
-                }
-
-                return acc
-            }, []))
             .then(setLeaderboard)
             .catch(console.log)
             .finally(() => setIsLoading(false))
