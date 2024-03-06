@@ -4,8 +4,8 @@ import bgMobile from './assets/images/bgMobile.png'
 import bgDesktop from './assets/images/bgDesktop.png'
 import logo from './assets/images/logo.svg'
 
-export const BIN_ID = '65dcd16b266cfc3fde8fa4b1'
-export const ENDPOINT_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest?meta=false`
+const LEADERBOARD_API_KEY = '2c92a2ad-f3ed-4fe3-8905-0089f9a6fa55'
+const LEADERBOARD_ENDPOINT_URL = 'https://jsonbin.org/me'
 const SPECIAL_GROUP_AMOUNT = 50
 const MIN_DESKTOP_WIDTH = 992
 
@@ -330,9 +330,12 @@ export function App() {
     useEffect(() => {
         setIsLoading(true)
 
-        fetch(ENDPOINT_URL, {
+        fetch(LEADERBOARD_ENDPOINT_URL, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `token ${LEADERBOARD_API_KEY}`,
+            },
         })
             .then(resp => resp.json())
             .then(setLeaderboard)
