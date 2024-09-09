@@ -1,13 +1,16 @@
+import { FTClient } from "ft-client";
 import {useEffect, useMemo, useRef, useState} from "react";
 import styled from "@emotion/styled";
 import bgMobile from './assets/images/bgMobile.png'
 import bgDesktop from './assets/images/bgDesktop.png'
 import logo from './assets/images/logo.svg'
 
-const LEADERBOARD_API_KEY = '2c92a2ad-f3ed-4fe3-8905-0089f9a6fa55'
-const LEADERBOARD_ENDPOINT_URL = 'https://jsonbin.org/me'
-const SPECIAL_GROUP_AMOUNT = 50
+const LEADERBOARD_ENDPOINT_URL = "https://ft-admin-api.sjuksin.ru/";
+const LEADERBOARD_PROJECT_ID = "vtb-tower";
+const SPECIAL_GROUP_AMOUNT = 30
 const MIN_DESKTOP_WIDTH = 992
+
+const ftClient = new FTClient(LEADERBOARD_ENDPOINT_URL, LEADERBOARD_PROJECT_ID);
 
 const Wrapper = styled.div`
     position: relative;
@@ -330,14 +333,8 @@ export function App() {
     useEffect(() => {
         setIsLoading(true)
 
-        fetch(LEADERBOARD_ENDPOINT_URL, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `token ${LEADERBOARD_API_KEY}`,
-            },
-        })
-            .then(resp => resp.json())
+        ftClient.loadProjectState()
+            .then(response => response?.data ?? [])
             .then(setLeaderboard)
             .catch(console.log)
             .finally(() => setIsLoading(false))
