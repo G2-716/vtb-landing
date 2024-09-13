@@ -333,8 +333,7 @@ export function App() {
     useEffect(() => {
         setIsLoading(true)
 
-        ftClient.loadProjectState()
-            .then(response => response?.data ?? [])
+        ftClient.loadRecordsPublicData()
             .then(setLeaderboard)
             .catch(console.log)
             .finally(() => setIsLoading(false))
